@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import gr.mastro.ageofempires2metadata.R
+import gr.mastro.ageofempires2metadata.civilizations.data.CivilizationModel
 import kotlinx.android.synthetic.main.civilization_item_view.view.*
 
 class CivilizationsAdapter: RecyclerView.Adapter<CivilizationsAdapter.MainViewHolder>() {
-    private var data : ArrayList<String>? = null
+    private var data : ArrayList<CivilizationModel>? = null
 
-    fun setData(list: ArrayList<String>){
+    fun setData(list: ArrayList<CivilizationModel>){
         data = list
         notifyDataSetChanged()
     }
@@ -29,8 +30,8 @@ class CivilizationsAdapter: RecyclerView.Adapter<CivilizationsAdapter.MainViewHo
     }
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindView(item: String?) {
-            itemView.item_title.text = item
+        fun bindView(item: CivilizationModel?) {
+            itemView.item_title.text = item?.name
         }
 
     }
