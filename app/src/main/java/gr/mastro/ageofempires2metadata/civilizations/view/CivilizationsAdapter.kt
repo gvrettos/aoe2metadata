@@ -31,7 +31,8 @@ class CivilizationsAdapter: RecyclerView.Adapter<CivilizationsAdapter.MainViewHo
 
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindView(item: CivilizationModel?) {
-            itemView.item_title.text = item?.name
+            itemView.item_title.text = item?.id + ". " + item?.name
+            itemView.item_description.text = item?.army_type
         }
 
     }
