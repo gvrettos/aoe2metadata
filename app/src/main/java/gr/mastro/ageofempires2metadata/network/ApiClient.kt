@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiClient {
-    private const val BASE_URL = "https://age-of-empires-2-api.herokuapp.com/api/v1/"
+    private const val BASE_URL = "https://my-json-server.typicode.com/gvrettos/aoe2-data/"
 
     private val gson : Gson by lazy {
         GsonBuilder().setLenient().create()

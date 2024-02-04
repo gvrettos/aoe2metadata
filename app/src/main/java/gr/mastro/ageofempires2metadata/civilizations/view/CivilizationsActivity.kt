@@ -29,7 +29,7 @@ class CivilizationsActivity : AppCompatActivity() {
                 civilizations.visibility = View.VISIBLE
                 civilizationsAdapter?.setData(it as ArrayList<CivilizationModel>)
             } else {
-                showToast("Something went wrong")
+                showToast("Something went wrong! No data retrieved...")
             }
             progress_civilizations.visibility = View.GONE
         })

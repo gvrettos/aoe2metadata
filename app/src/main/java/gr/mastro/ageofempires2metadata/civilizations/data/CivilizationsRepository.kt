@@ -12,19 +12,19 @@ class CivilizationsRepository {
     fun fetchAllCivilizations(): LiveData<List<CivilizationModel>> {
         val data = MutableLiveData<List<CivilizationModel>>()
 
-        ApiClient.apiService.fetchAllCivilizations().enqueue(object : Callback<CivilizationsModel> {
+        ApiClient.apiService.fetchAllCivilizations().enqueue(object : Callback<List<CivilizationModel>> {
 
-            override fun onFailure(call: Call<CivilizationsModel>, t: Throwable) {
+            override fun onFailure(call: Call<List<CivilizationModel>>, t: Throwable) {
                 data.value = null
             }
 
             override fun onResponse(
-                call: Call<CivilizationsModel>,
-                response: Response<CivilizationsModel>) {
+                call: Call<List<CivilizationModel>>,
+                response: Response<List<CivilizationModel>>) {
 
                 val res = response.body()
                 if (response.code() == 200 && res != null) {
-                    data.value = res.civilizations
+                    data.value = res
                 } else {
                     data.value = null
                 }
