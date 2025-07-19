@@ -7,36 +7,38 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import gr.mastro.ageofempires2metadata.R
 import gr.mastro.ageofempires2metadata.civilizations.data.CivilizationModel
 import gr.mastro.ageofempires2metadata.civilizations.viewmodel.CivilizationsViewModel
-import kotlinx.android.synthetic.main.activity_civilizations.*
+import gr.mastro.ageofempires2metadata.databinding.ActivityCivilizationsBinding
 
 class CivilizationsActivity : AppCompatActivity() {
     private var civilizationsAdapter : CivilizationsAdapter? = null
-    lateinit var viewModel : CivilizationsViewModel
+    private lateinit var viewModel : CivilizationsViewModel
+    private lateinit var binding: ActivityCivilizationsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_civilizations)
+        binding = ActivityCivilizationsBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         initAdapter()
 
-        viewModel = ViewModelProvider(this).get(CivilizationsViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CivilizationsViewModel::class.java]
         viewModel.fetchAllCivilizations()
         viewModel.civilizationModelListLiveData?.observe(this, Observer {
             if (it != null) {
-                civilizations.visibility = View.VISIBLE
+                binding.civilizations.visibility = View.VISIBLE
                 civilizationsAdapter?.setData(it as ArrayList<CivilizationModel>)
             } else {
                 showToast("Something went wrong! No data retrieved...")
             }
-            progress_civilizations.visibility = View.GONE
+            binding.progressCivilizations.visibility = View.GONE
         })
     }
 
     private fun initAdapter() {
-        civilizations.apply {
+        binding.civilizations.apply {
             layoutManager = LinearLayoutManager(this@CivilizationsActivity)
             civilizationsAdapter = CivilizationsAdapter()
             adapter = civilizationsAdapter
